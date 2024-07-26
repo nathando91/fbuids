@@ -7,10 +7,10 @@ export type FbidPhoneDocument = FbidPhone & Document;
 
 @Schema({ collection: 'fbid_phones' })  // Custom collection name
 export class FbidPhone {
-    @Prop({ required: true, unique: true })
+    @Prop({ required: true, unique: true, index: true })  // Index this field
     uid: number;
 
-    @Prop({ required: true })
+    @Prop({ required: true, index: true })  // Index this field
     phone: number;
 
     @Prop()
@@ -31,6 +31,7 @@ export class FbidPhone {
     @Prop()
     name: string;
 
+    @Prop({ index: true })  // Index this field
     username: string;
 }
 
