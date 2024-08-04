@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { FbidPhone, FbidPhoneSchema } from './schemas/fbid-phone.schema';
+import { TelegramService } from './telegram.service';
 
 @Module({
   imports: [
@@ -10,6 +11,6 @@ import { FbidPhone, FbidPhoneSchema } from './schemas/fbid-phone.schema';
     MongooseModule.forFeature([{ name: FbidPhone.name, schema: FbidPhoneSchema }]),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, TelegramService],
 })
 export class AppModule { }
