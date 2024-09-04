@@ -16,8 +16,9 @@ services:
   mongo:
     image: mongo:latest
     volumes:
-      - mongodb-data:/data/db
+      - nestjs-mongodb-project_mongodb-data:/data/db
     extra_hosts:
       - host.docker.internal:host-gateway
 volumes:
-  mongodb-data:
+  nestjs-mongodb-project_mongodb-data:
+    external: true

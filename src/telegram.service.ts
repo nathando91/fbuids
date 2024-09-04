@@ -3,6 +3,7 @@ import * as TelegramBot from 'node-telegram-bot-api';
 
 export class TelegramService implements OnModuleInit {
     private bot: TelegramBot;
+
     // replace real admin telegram ID later
     private readonly admins: number[] = [5725095350];
 
@@ -12,7 +13,7 @@ export class TelegramService implements OnModuleInit {
     }
 
     onModuleInit() {
-        this.initBot();
+        // this.initBot();
 
     }
 
