@@ -1,0 +1,4 @@
+# Template for Nginx
+sudo rm -rf  /var/lib/letsencrypt/temp_checkpoint/* 
+sudo certbot --nginx -d api.uidconvert.naikyo.online -d www.api.uidconvert.naikyo.online
+sudo systemctl restart nginx
