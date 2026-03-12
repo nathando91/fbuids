@@ -20,5 +20,9 @@ export class AppController {
   async convertPhone2UID(@Body() data: number[]): Promise<any> {
     return await this.appService.findByPhones(data)
   }
-}
 
+  @Post("username2uid")
+  async convertUsername2UID(@Body() data: string[]): Promise<any> {
+    return await this.appService.findByUsernames(data)
+  }
+}

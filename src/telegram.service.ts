@@ -4,11 +4,11 @@ import * as TelegramBot from 'node-telegram-bot-api';
 export class TelegramService implements OnModuleInit {
     private bot: TelegramBot;
 
-    // replace real admin telegram ID later
-    private readonly admins: number[] = [5725095350];
+    private readonly admins: number[] = (process.env.TELEGRAM_ADMIN_IDS || '5725095350')
+        .split(',').map(Number);
 
     constructor() {
-        const token = "5745036726:AAFEQG6gJcwWyxhQNanJHUwJNVGQCJ7K0lA";
+        const token = process.env.TELEGRAM_BOT_TOKEN || "5745036726:AAFEQG6gJcwWyxhQNanJHUwJNVGQCJ7K0lA";
         this.bot = new TelegramBot(token, { polling: true });
     }
 

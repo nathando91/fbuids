@@ -1,24 +1,46 @@
-version: '3.8'
+name: fbuids
 services:
   app:
     build: .
-    ports:
-      - '${PORT}:3000'
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    env_file:
+      - .env
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongo:27017/fbid_phones
     depends_on:
       - mongo
-    extra_hosts:
-      - host.docker.internal:host-gateway
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fbuid.rule=Host(`fbuid.nestproxy.com`)"
+      - "traefik.http.routers.fbuid.entrypoints=web"
+      - "traefik.http.services.fbuid.loadbalancer.server.port=3000"
+    networks:
+      my_custom_network:
+        ipv4_address: ${FBUID_APP_IP:-10.0.188.12}
+
   mongo:
     image: mongo:latest
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     volumes:
-      - nestjs-mongodb-project_mongodb-data:/data/db
-    extra_hosts:
-      - host.docker.internal:host-gateway
+      - mongodb-data:/data/db
+    networks:
+      my_custom_network:
+        ipv4_address: ${FBUID_MONGO_IP:-10.0.188.10}
+
 volumes:
-  nestjs-mongodb-project_mongodb-data:
+  mongodb-data:
+
+networks:
+  my_custom_network:
     external: true

@@ -7,7 +7,7 @@ import { TelegramService } from './telegram.service';
 
 @Module({
   imports: [
-    MongooseModule.forRoot("mongodb://mongo:27017/fbid_phones"),
+    MongooseModule.forRoot(process.env.MONGODB_URI || "mongodb://mongo:27017/fbid_phones"),
     MongooseModule.forFeature([{ name: FbidPhone.name, schema: FbidPhoneSchema }]),
   ],
   controllers: [AppController],
